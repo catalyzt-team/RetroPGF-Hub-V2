@@ -321,16 +321,16 @@ export default function ProjectTab({
                       icon={item.profileAvatarUrl ?? ''}
                       banner={item.projectCoverImageUrl ?? ''}
                       category={item.category ?? ''}
-                      applicationCategory={item.applicationCategory ?? ''}
+                      applicationCategory={item.applicationCategory}
                       description={item.description ?? ''}
                       title={item.name}
                       teamSize={item.team?.length ?? 0}
                       // teamSize={1}
                       round="5"
                       isEligible={true}
-                      reward={0}
+                      reward={item.allocation ?? 0}
                       // votes={0}
-                      // rank={0}
+                      rank={item.rank ?? 0}
                     />
                   </React.Fragment>
                 ))

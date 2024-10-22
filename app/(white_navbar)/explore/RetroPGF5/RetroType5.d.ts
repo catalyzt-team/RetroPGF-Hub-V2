@@ -31,6 +31,8 @@ export interface iRetroPGF5Project {
   pricingModel: PricingModelClass | string
   impactStatement: ImpactStatement
   testimonials: string
+  allocation: number
+  rank: number
 }
 
 export enum ApplicationCategoryEnum {

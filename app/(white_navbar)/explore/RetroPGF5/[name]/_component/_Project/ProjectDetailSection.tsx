@@ -39,10 +39,9 @@ export default function ProjectDetailSection({ data }: iProjectDetailSection) {
           <div className="flex flex-col gap-4 p-2 sm:p-4 md:px-4 md:pt-0 lg:p-0 ">
             <h3 className="flex items-center text-3xl lg:text-5xl font-semibold text-gray-800">
               {data.name}
-              {/* <div className="flex-grow"></div>
+              <div className="flex-grow"></div>
               <div className="hidden md:flex items-center px-10 py-3 rounded-xl text-xl bg-red-50">
-                {numberWithCommas(data.reward ?? 20000)}
-                0.00
+                {numberWithCommas(data.allocation ?? 0)}
                 <Image
                   src="/static/superchainLogo/optimism.svg"
                   alt="OP Token"
@@ -50,7 +49,7 @@ export default function ProjectDetailSection({ data }: iProjectDetailSection) {
                   height={25}
                   className="ml-2"
                 />
-              </div> */}
+              </div>
             </h3>
             {/* <div className="hidden lg:block bg-gray-100 text-gray-600 text-sm truncate w-fit px-3 py-1.5 rounded-full">
               {truncateProjectId('0xsdfjksdpfjsdijfpodsjfposdjf')}
@@ -67,8 +66,8 @@ export default function ProjectDetailSection({ data }: iProjectDetailSection) {
               )} */}
             </div>
             {/* This will show when project reward is available */}
-            {/* <div className="flex w-fit items-center md:hidden px-5 py-3 mb-4 rounded-xl text-base font-medium bg-red-50">
-              {numberWithCommas(0)}
+            <div className="flex w-fit items-center md:hidden px-5 py-3 mb-4 rounded-xl text-base font-medium bg-red-50">
+              {numberWithCommas(data.allocation ?? 0)}
               <Image
                 src="/static/superchainLogo/optimism.svg"
                 alt="OP Token"
@@ -76,7 +75,7 @@ export default function ProjectDetailSection({ data }: iProjectDetailSection) {
                 height={25}
                 className="ml-2"
               />
-            </div> */}
+            </div>
             <div className="flex flex-wrap gap-6 my-1 md:my-3 lg:my-4">
               {data.socialLinks.website.length > 0 &&
                 data.socialLinks.website.map((item, i) => (

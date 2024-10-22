@@ -15,6 +15,7 @@ import PackageSection from './_component/_Project/PackageSection'
 import LinkSection from './_component/_Project/LinkSection'
 import ImpactStatementSection from './_component/_Project/ImpactStatementSection'
 import { EASProjectMetadata } from '@/app/types/realtime-api-agora'
+import ImpactGardenSection from './_component/_Project/ImpactGardenSection'
 
 interface iCpage {
   data: iRetroPGF6Project
@@ -27,15 +28,27 @@ export default function Cpage({ data }: iCpage) {
   const contractRef = useRef<HTMLElement | null>(null)
   const linkSectionRef = useRef<HTMLElement | null>(null)
   const impactRef = useRef<HTMLElement | null>(null)
-  const [sections, setSections] = useState([
-    { name: 'Overview', ref: overViewRef },
-    { name: 'Impact Statement', ref: impactRef },
-    { name: 'Funding Sources', ref: fundingRef },
-    { name: 'GitHub', ref: githubRef },
-    { name: 'Contract Address', ref: contractRef },
-    { name: 'Package', ref: packageRef },
-    { name: 'Link', ref: linkSectionRef },
-  ])
+  const impactGardenRef = useRef<HTMLElement | null>(null)
+  const [sections, setSections] = useState(() => {
+    const initialSections = [
+      { name: 'Overview', ref: overViewRef },
+      { name: 'Impact Statement', ref: impactRef },
+      { name: 'Funding Sources', ref: fundingRef },
+      { name: 'GitHub', ref: githubRef },
+      { name: 'Contract Address', ref: contractRef },
+      { name: 'Package', ref: packageRef },
+      { name: 'Link', ref: linkSectionRef },
+    ]
+
+    if (data.impactIpfs.category === 'Governance Infra & Tooling') {
+      initialSections.splice(2, 0, {
+        name: 'Impact Garden',
+        ref: impactGardenRef,
+      })
+    }
+
+    return initialSections
+  })
 
   const insertAtPosition = 2
   // useEffect(() => {
@@ -86,6 +99,9 @@ export default function Cpage({ data }: iCpage) {
           <OverviewSection data={data} />
         </section>
         <ImpactStatementSection data={data} impactSectionRef={impactRef} />
+        {data.impactIpfs.category === 'Governance Infra & Tooling' && (
+          <ImpactGardenSection data={data} impactGardenRef={impactGardenRef} />
+        )}
         <FundingSection data={data} fundingRef={fundingRef} />
         <GithubSection data={data} githubRef={githubRef} />
         <ContractSection data={data} contractRef={contractRef} />

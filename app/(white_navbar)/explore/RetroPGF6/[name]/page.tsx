@@ -5,6 +5,7 @@ import { getRealTimeRetroPGF6 } from '@/app/lib/realtime'
 import { iRetroPGF6Project } from '../RetroType6'
 import Cpage from './Cpage'
 import { EASProjectMetadata } from '@/app/types/realtime-api-agora'
+import { getJsonRound6 } from '../page'
 
 interface pageProps {
   params: {
@@ -17,7 +18,8 @@ export const dynamic = 'force-dynamic'
 async function FindRound6Data(
   decodedString: string
 ): Promise<iRetroPGF6Project | undefined> {
-  const data = await getRealTimeRetroPGF6()
+  // const data = await getRealTimeRetroPGF6()
+  const data = await getJsonRound6()
   const projectData = data.find((elem) => {
     return cleanParamsName(elem.name) === decodedString
   })

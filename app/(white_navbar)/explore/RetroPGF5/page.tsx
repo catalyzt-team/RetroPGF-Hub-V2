@@ -4,6 +4,8 @@ import BreadcrumbExplore from './_component/BreadcrumbExplore'
 import { iRetroPGF5Project } from './RetroType5'
 import { getRealTimeRetroPGF5 } from '@/app/lib/realtime'
 import React from 'react'
+import path from 'path'
+import fs from 'fs'
 
 async function getJsonBadgeholderMetric(): Promise<BadgeholderMetrics[]> {
   // const directoryPath = path.join(
@@ -17,20 +19,23 @@ async function getJsonBadgeholderMetric(): Promise<BadgeholderMetrics[]> {
 
 export const dynamic = 'force-dynamic'
 
-async function getJsonRetroPGF5(): Promise<iRetroPGF5Project[]> {
-  const data = await getRealTimeRetroPGF5()
-  const filterUniqueData = data.filter((item, index, self) => {
-    return (
-      item.applicationCategory &&
-      index === self.findIndex((x) => x.name === item.name)
+export async function getJsonRound5(): Promise<iRetroPGF5Project[]> {
+  try {
+    const directoryPath = path.join(
+      process.cwd(),
+      'public/static/rpgf5/rpgf5.json'
     )
-  })
-  return filterUniqueData
+    const fileContents = await fs.promises.readFile(directoryPath, 'utf8')
+    return JSON.parse(fileContents) as iRetroPGF5Project[]
+  } catch (error) {
+    console.error('Error reading or parsing rpgf6.json:', error)
+    return []
+  }
 }
 
 export default async function page() {
   const badgeholderData = await getJsonBadgeholderMetric()
-  const projectRound5 = await getJsonRetroPGF5()
+  const projectRound5 = await getJsonRound5()
 
   return (
     <>

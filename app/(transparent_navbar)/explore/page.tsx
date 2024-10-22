@@ -12,6 +12,8 @@ import { Metadata } from 'next'
 import { shuffle } from '@/app/lib/utils'
 import { iRetroPGF5Project } from '@/app/(white_navbar)/explore/RetroPGF5/RetroType5'
 import { iRetroPGF6Project } from '@/app/(white_navbar)/explore/RetroPGF6/RetroType6'
+import { getJsonRound6 } from '@/app/(white_navbar)/explore/RetroPGF6/page'
+import { getJsonRound5 } from '@/app/(white_navbar)/explore/RetroPGF5/page'
 
 export const dynamic = 'force-dynamic'
 
@@ -60,8 +62,8 @@ export async function getAllRound(limit: number): Promise<{
   const round2 = await getJsonRound2()
   const round3 = await getJsonRound3()
   const round4 = await getJsonRound4()
-  const round5Raw = await getRealTimeRetroPGF5()
-  const round6Raw = await getRealTimeRetroPGF6()
+  const round5Raw = await getJsonRound5()
+  const round6Raw = await getJsonRound6()
 
   const cateRound2Counter = new Map<string, number>()
   const cateRound3Counter = new Map<string, number>()

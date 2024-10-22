@@ -4,6 +4,7 @@ import { cleanParamsName } from '@/app/lib/utils'
 import { getRealTimeRetroPGF5 } from '@/app/lib/realtime'
 import { iRetroPGF5Project } from '../RetroType5'
 import Cpage from './Cpage'
+import { getJsonRound5 } from '../page'
 
 interface pageProps {
   params: {
@@ -16,7 +17,7 @@ export const dynamic = 'force-dynamic'
 async function FindRound5Data(
   decodedString: string
 ): Promise<iRetroPGF5Project | undefined> {
-  const data = await getRealTimeRetroPGF5()
+  const data = await getJsonRound5()
   const projectData = data.find((elem) => {
     return cleanParamsName(elem.name) === decodedString
   })

@@ -111,8 +111,8 @@ export default function CardRound5({ title, round5, cateRound5 }: iCardRound5) {
                     category={item.category ?? ''}
                     description={item.description ?? ''}
                     teamSize={item.team?.length ?? 0}
-                    // opRecieve={0}
-                    // rank={0}
+                    opRecieve={item.allocation}
+                    rank={item.rank}
                     round="RetroPGF 5"
                     // vote={0}
                     icon={item.profileAvatarUrl ?? ''}

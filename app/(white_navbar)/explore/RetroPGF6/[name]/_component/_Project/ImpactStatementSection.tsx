@@ -46,14 +46,14 @@ export default function ImpactStatementSection({
       {Array.isArray(data.impactIpfs.impactStatement) &&
         data.impactIpfs.impactStatement?.length !== 0 &&
         data.impactIpfs.impactStatement?.map((item: any, i: number) => (
-          <div key={i} className="flex flex-col gap-2">
+          <div key={i} className="flex flex-col gap-y-4">
             <div className="text-lg break-words font-semibold text-gray-800">
               {item.question}
             </div>
             <div>
               {item.answer && (
                 <a
-                  className="text-base break-words font-normal text-gray-600"
+                  className="text-base break-words font-normal text-gray-600 space-y-5"
                   dangerouslySetInnerHTML={{
                     __html: convertMarkdownToHtml(item.answer),
                   }}

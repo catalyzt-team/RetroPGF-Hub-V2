@@ -11,8 +11,8 @@ interface iRetroCard5 {
   category?: string
   description?: string
   teamSize?: number
-  //   opRecieve?: number
-  //   rank?: number
+  opRecieve?: number
+  rank?: number
   round?: string
   title?: string
   //   vote?: number
@@ -38,8 +38,8 @@ export default function RetroCard5({
   category,
   description,
   teamSize,
-  //   opRecieve,
-  //   rank,
+  opRecieve,
+  rank,
   round,
   title,
   //   vote,
@@ -48,7 +48,7 @@ export default function RetroCard5({
 }: iRetroCard5) {
   return (
     <div
-      className={`flex flex-col gap-2 flex-grow-1 flex-shrink-0 border rounded-lg shadow-sm h-[16rem] w-[14.25rem] relative ${marginX} overflow-hidden`}
+      className={`flex flex-col gap-2 flex-grow-1 flex-shrink-0 border rounded-lg shadow-sm h-[17rem] w-[14.25rem] relative ${marginX} overflow-hidden`}
     >
       {/* Background Image */}
       <div className="absolute top-0 left-0 w-full max-h-14 overflow-hidden">
@@ -108,16 +108,18 @@ export default function RetroCard5({
           </div>
           <div className="flex flex-grow"></div>
           <div className="flex justify-between items-center w-full">
-            <div className="flex gap-1">
+            <div className="flex gap-2">
               <Events size={20} />
-              <p className="text-sm font-semibold text-gray-800">
-                {/* {Math.ceil(vote || 0).toString()} */}
-                {teamSize}
-              </p>
-              <p className="text-sm font-light text-gray-600">People</p>
+              <div className="flex gap-1">
+                <p className="text-sm font-semibold text-gray-800">
+                  {/* {Math.ceil(vote || 0).toString()} */}
+                  {teamSize}
+                </p>
+                <p className="text-sm font-light text-gray-600">People</p>
+              </div>
             </div>
           </div>
-          {/* <div className="flex gap-2">
+          <div className="flex gap-2">
             <Trophy size={20} />
             <div className="flex gap-1">
               <p className="text-sm font-semibold text-gray-800">
@@ -129,7 +131,7 @@ export default function RetroCard5({
               </p>
               <p className="text-sm font-light text-gray-600">#{rank}</p>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

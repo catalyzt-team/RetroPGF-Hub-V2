@@ -5,6 +5,8 @@ import { iRetroPGF6Project } from './RetroType6'
 import { getRealTimeRetroPGF6 } from '@/app/lib/realtime'
 import React from 'react'
 import { EASProjectMetadata } from '@/app/types/realtime-api-agora'
+import path from 'path'
+import fs from 'fs'
 
 async function getJsonBadgeholderMetric(): Promise<BadgeholderMetrics[]> {
   // const directoryPath = path.join(
@@ -18,19 +20,33 @@ async function getJsonBadgeholderMetric(): Promise<BadgeholderMetrics[]> {
 
 export const dynamic = 'force-dynamic'
 
-async function getJsonRetroPGF6(): Promise<iRetroPGF6Project[]> {
-  const data = await getRealTimeRetroPGF6()
-  const filterUniqueData = data.filter((item, index, self) => {
-    return (
-      item.category && index === self.findIndex((x) => x.name === item.name)
+// async function getJsonRetroPGF6(): Promise<iRetroPGF6Project[]> {
+//   const data = await getRealTimeRetroPGF6()
+//   const filterUniqueData = data.filter((item, index, self) => {
+//     return (
+//       item.category && index === self.findIndex((x) => x.name === item.name)
+//     )
+//   })
+//   return filterUniqueData
+// }
+
+export async function getJsonRound6(): Promise<iRetroPGF6Project[]> {
+  try {
+    const directoryPath = path.join(
+      process.cwd(),
+      'public/static/rpgf6/rpgf6.json'
     )
-  })
-  return filterUniqueData
+    const fileContents = await fs.promises.readFile(directoryPath, 'utf8')
+    return JSON.parse(fileContents) as iRetroPGF6Project[]
+  } catch (error) {
+    console.error('Error reading or parsing rpgf6.json:', error)
+    return []
+  }
 }
 
 export default async function page() {
   const badgeholderData = await getJsonBadgeholderMetric()
-  const projectRound6 = await getJsonRetroPGF6()
+  const projectRound6 = await getJsonRound6()
 
   return (
     <>

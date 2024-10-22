@@ -54,6 +54,7 @@ export default function Cpage({ data }: iCpage) {
   //     })
   //   }
   // }, [data.impactMetrics])
+  console.log(data)
   const [loading, setLoading] = useState(true)
   const load = () => {
     setTimeout(() => {

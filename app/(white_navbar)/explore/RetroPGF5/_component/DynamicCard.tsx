@@ -5,12 +5,10 @@ import { Star } from '@carbon/icons-react'
 import Events from '@carbon/icons-react/lib/Events'
 import Image from 'next/image'
 import Link from 'next/link'
-import {
-  handleApplicationCategoryRound5,
-  handleProjectCategoryRound,
-} from '@/app/lib/common'
+import { handleCategoryRound4, handleOpenSource } from '@/app/lib/common'
 import { cleanParamsName, numberWithCommas } from '@/app/lib/utils'
-import { app } from '../../../../lib/firebase'
+
+const OpTokenPath = '/static/superchainLogo/optimism.svg'
 
 interface iDynamicCard {
   banner?: string
@@ -18,12 +16,13 @@ interface iDynamicCard {
   round?: string
   title?: string
   description?: string
-  category?: string
   applicationCategory?: string
+  category?: string
   teamSize?: number
   isEligible?: boolean
-
+  isOpenSource?: boolean
   reward?: number
+  rank?: number
 }
 export default function DynamicCard({
   banner,
@@ -31,19 +30,21 @@ export default function DynamicCard({
   round = '5',
   title = '',
   description = '',
-  category = '',
   applicationCategory = '',
+  category = '',
   teamSize = 0,
-  isEligible = true,
+  isEligible,
+  isOpenSource = false,
   reward = 0,
+  rank = 0,
 }: iDynamicCard) {
   const categoryElement = useMemo(
-    () => handleProjectCategoryRound(category, 'text-xs'),
+    () => handleCategoryRound4(category),
     [category]
   )
-  const applicationCategoryElement = useMemo(
-    () => handleApplicationCategoryRound5(applicationCategory, 'text-xs'),
-    [applicationCategory]
+  const openSourceElement = useMemo(
+    () => handleOpenSource(isOpenSource),
+    [isOpenSource]
   )
 
   return (
@@ -77,7 +78,6 @@ export default function DynamicCard({
           </div>
         )}
       </div>
-
       {/* Avatar */}
       <div className="absolute top-10 lg:top-12 left-4 rounded-[0.25rem] bg-white flex flex-shrink-0 z-20 overflow-hidden">
         <Image
@@ -103,23 +103,28 @@ export default function DynamicCard({
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {applicationCategoryElement}
             {categoryElement}
-            {/* {openSourceElement} */}
+            {openSourceElement}
           </div>
           <div className="flex-grow"></div>
-
-          {/* This is for result announced */}
-          {/* <div className="flex justify-center items-center gap-2 bg-red-50 rounded-md px-4 py-2.5 w-full group">
-            <div className="flex flex-row justify-center items-center gap-x-2 group-hover:scale-105 transition-all ease-linear">
+          <div className="flex gap-2">
+            <Events size={20} />
+            <div className="flex gap-1">
               <p className="text-sm font-semibold text-gray-800">
-                {numberWithCommas(reward || 0)}
+                {Math.ceil(teamSize).toString()}
               </p>
-              <p className="text-sm font-light text-gray-600">
-                <Image src={OpTokenPath} alt="OpToken" width={18} height={18} />
-              </p>
+              <p className="text-sm font-light text-gray-600">People</p>
             </div>
-          </div> */}
+          </div>
+          <div className="flex gap-2">
+            <Trophy size={20} />
+            <div className="flex gap-1">
+              <p className="text-sm font-semibold text-gray-800">
+                {numberWithCommas(reward.toFixed(2) || 0)} OP
+              </p>
+              <p className="text-sm font-light text-gray-600">#{rank}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
