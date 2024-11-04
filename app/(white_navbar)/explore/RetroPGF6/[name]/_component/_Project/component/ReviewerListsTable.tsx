@@ -1,14 +1,10 @@
 import { RiStarFill, RiUserSearchFill } from '@remixicon/react'
-import {
-  BadgeholderImpactGarden,
-  DelegateImpactGarden,
-  ImpactGardenMetrics,
-} from '../../../../RetroType6'
+import {} from '../../../../RetroType6'
 import Image from 'next/image'
 interface iReviewerListsTable {
-  impactGardenMetrics: ImpactGardenMetrics[] | null
-  delegateUsers: DelegateImpactGarden[]
-  badgeholderUsers: BadgeholderImpactGarden[]
+  impactGardenMetrics: any
+  delegateUsers: any
+  badgeholderUsers: any
 }
 
 export default function ReviewerListsTable({
@@ -58,42 +54,44 @@ export default function ReviewerListsTable({
                 </tr>
               </thead>
               <tbody>
-                {impactGardenMetrics?.map((impactGardenMetric, index) => (
-                  <tr key={impactGardenMetric.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-600">
-                      {index + 1}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 h-7 w-7">
-                          <Image
-                            className="h-7 w-7 rounded-full"
-                            src={impactGardenMetric.pfp}
-                            alt="Profile Picture"
-                            width={25}
-                            height={25}
-                          />
-                        </div>
-                        <div className="ml-3">
-                          <div className="text-sm font-medium text-neutral-900">
-                            {impactGardenMetric.username}
+                {impactGardenMetrics?.map(
+                  (impactGardenMetric: any, index: number) => (
+                    <tr key={impactGardenMetric.id}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-600">
+                        {index + 1}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 h-7 w-7">
+                            <Image
+                              className="h-7 w-7 rounded-full"
+                              src={impactGardenMetric.pfp}
+                              alt="Profile Picture"
+                              width={25}
+                              height={25}
+                            />
+                          </div>
+                          <div className="ml-3">
+                            <div className="text-sm font-medium text-neutral-900">
+                              {impactGardenMetric.username}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-600">
-                      <div className="flex items-center gap-x-1">
-                        {Number(impactGardenMetric.likely_to_recommend) / 2}
-                        <RiStarFill size={15} color="#FFC55A" />
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-600">
-                      {ifNotExistMapPassage[
-                        impactGardenMetric.feeling_if_didnt_exist as keyof typeof ifNotExistMapPassage
-                      ] ?? ifNotExistMapPassage.Unknown}
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-600">
+                        <div className="flex items-center gap-x-1">
+                          {Number(impactGardenMetric.likely_to_recommend) / 2}
+                          <RiStarFill size={15} color="#FFC55A" />
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-600">
+                        {ifNotExistMapPassage[
+                          impactGardenMetric.feeling_if_didnt_exist as keyof typeof ifNotExistMapPassage
+                        ] ?? ifNotExistMapPassage.Unknown}
+                      </td>
+                    </tr>
+                  )
+                )}
               </tbody>
             </table>
           </div>

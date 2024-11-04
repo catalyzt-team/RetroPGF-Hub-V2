@@ -20,9 +20,10 @@ export function splitTextNewLine(text: string) {
   return text.split('\n').map((paragraph, i) => (
     <p
       key={i}
-      className={`text-base font-normal text-gray-600 break-words ${
-        i != text.split('\n').length - 1 ? 'mb-5' : ''
+      className={`flex flex-wrap text-base font-normal text-gray-600 break-words break-all ${
+        i != text.split('\n').length - 1 ? 'mb-3' : ''
       }`}
+      // style={{ wordBreak: 'break-all' }}
     >
       {paragraph}
     </p>
@@ -90,7 +91,7 @@ export function handleApplicationCategoryRound6(
   category: string,
   textSize: string
 ) {
-  if (category === 'Governance Leadership') {
+  if (category === 'GOVERNANCE_LEADERSHIP') {
     return (
       <div className="px-2 py-1 bg-yellow-50 rounded-full w-fit">
         <p
@@ -100,7 +101,7 @@ export function handleApplicationCategoryRound6(
         </p>
       </div>
     )
-  } else if (category === 'Governance Infra & Tooling') {
+  } else if (category === 'GOVERNANCE_INFRA_AND_TOOLING') {
     return (
       <div className="px-2 py-1 bg-orange-50 rounded-full w-fit">
         <p
@@ -110,7 +111,7 @@ export function handleApplicationCategoryRound6(
         </p>
       </div>
     )
-  } else if (category === 'Governance Analytics') {
+  } else if (category === 'GOVERNANCE_ANALYTICS') {
     return (
       <div className="px-2 py-1 bg-sky-50 rounded-full w-fit">
         <p

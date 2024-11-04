@@ -39,11 +39,11 @@ export default function ContractSection({ data, contractRef }: iContract) {
             i: number
           ) => (
             <div
-              className="flex flex-col gap-1 rounded-lg bg-slate-50 px-6 py-4"
+              className="flex flex-col flex-wrap gap-3 rounded-lg bg-slate-50 px-8 py-6  flex-grow"
               key={item.deploymentTxHash}
             >
-              <div className="flex flex-row flex-wrap gap-3 items-center ">
-                <div className="flex gap-3">
+              <div className="flex flex-row flex-wrap gap-3 items-center">
+                <div className="flex items-center gap-3">
                   <Image
                     src={`/static/superchainLogo/${mapChainId(
                       item.chainId
@@ -57,10 +57,9 @@ export default function ContractSection({ data, contractRef }: iContract) {
                     {getNameByChainId(item.chainId)}
                   </p>
                 </div>
-                {/* <div>|</div> */}
-                <p className="text-base text-gray-500 font-rubik truncate">
+                <div className="text-base text-gray-500 font-rubik truncate max-w-64 md:max-w-none">
                   {item.address}
-                </p>
+                </div>
               </div>
             </div>
           )

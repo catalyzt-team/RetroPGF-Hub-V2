@@ -1,11 +1,16 @@
 import Link from 'next/link'
 import { iRetroPGF6Project } from '../../../RetroType6'
-import LinkIcon from '@carbon/icons-react/lib/Link'
-import { EASProjectMetadata } from '@/app/types/realtime-api-agora'
+import { RiArchiveLine } from '@remixicon/react'
 
 interface iPackageSection {
   data: iRetroPGF6Project
   packageRef: React.MutableRefObject<HTMLElement | null>
+}
+
+function extractPackageName(url: string): string {
+  const regex = /\/package\/([^\/]+)/
+  const match = url.match(regex)
+  return match ? decodeURIComponent(match[1]) : ''
 }
 export default function PackageSection({ data, packageRef }: iPackageSection) {
   return (
@@ -25,21 +30,24 @@ export default function PackageSection({ data, packageRef }: iPackageSection) {
         data.packages?.map((item, i) => (
           <div
             key={item.name}
-            className="flex flex-col gap-1 bg-slate-50 rounded-lg px-6 py-4 min-w-72"
+            className="flex flex-col flex-wrap gap-3 rounded-lg bg-slate-50 px-8 py-6 min-w-80 flex-grow flex-1"
           >
-            <Link
-              key={i}
-              href={item.url ? item.url : '#'}
-              className="flex items-center gap-2  flex-grow text-base font-medium line-clamp-2 hover:text-primaryRed"
-            >
-              <LinkIcon size={20} className="group-hover:text-primaryRed" />
-              {item.name ? item.name : item.url}
-            </Link>
-            <div>
-              {item.description && (
-                <p className="text-sm text-gray-500">{item.description}</p>
-              )}
+            <RiArchiveLine size={25} color="#000" />
+            <div className="flex flex-col w-full">
+              <Link
+                key={i}
+                href={item.url ? item.url : '#'}
+                target="_blank"
+                className="font-semibold text-lg font-rubik mb-1 hover:text-primaryRed"
+              >
+                {item.name ? item.name : extractPackageName(item.url)}
+              </Link>
             </div>
+            {/* <div>
+              <p className="text-sm text-gray-500">
+                {item.description} {item.name} {item.url}
+              </p>
+            </div> */}
           </div>
         ))}
     </section>

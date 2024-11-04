@@ -12,6 +12,11 @@ export default function ApplicationCategoryDisclosure({
   checkBox,
   handleChangeApplicationCategory,
 }: IApplicationCategoryDisclosure) {
+  const applicationCategoryMap: { [key: string]: string } = {
+    'Governance Analytics': 'GOVERNANCE_ANALYTICS',
+    'Governance Infra & Tooling': 'GOVERNANCE_INFRA_AND_TOOLING',
+    'Governance Leadership': 'GOVERNANCE_LEADERSHIP',
+  }
   return (
     <>
       <Disclosure defaultOpen={true}>
@@ -44,9 +49,13 @@ export default function ApplicationCategoryDisclosure({
                       label={item.value}
                       value={item.name}
                       className="cursor-pointer"
-                      checked={checkBox.applicationCategory.includes(item.name)}
+                      checked={checkBox.applicationCategory.includes(
+                        applicationCategoryMap[item.name]
+                      )}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        handleChangeApplicationCategory(e.target.value)
+                        handleChangeApplicationCategory(
+                          applicationCategoryMap[item.name]
+                        )
                       }}
                     />
                   </div>

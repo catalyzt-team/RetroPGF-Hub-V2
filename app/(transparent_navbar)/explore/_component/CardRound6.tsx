@@ -91,7 +91,9 @@ export default function CardRound6({ title, round6, cateRound6 }: iCardRound6) {
             <Swiper
               onSwiper={setSwiper}
               slidesPerView="auto"
-              pagination={true}
+              allowTouchMove={true}
+              effect="slide"
+              pagination={{ clickable: true }}
               modules={[Pagination, Controller]}
               initialSlide={0}
               direction="horizontal"
@@ -115,7 +117,7 @@ export default function CardRound6({ title, round6, cateRound6 }: iCardRound6) {
                     // rank={0}
                     round="RetroPGF 6"
                     // vote={0}
-                    icon={item.projectAvatarUrl ?? ''}
+                    icon={item.profileAvatarUrl ?? ''}
                     banner={item.projectCoverImageUrl ?? ''}
                     isEligible={true}
                   />

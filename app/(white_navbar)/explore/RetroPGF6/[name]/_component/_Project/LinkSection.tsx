@@ -1,7 +1,10 @@
-import { EASProjectMetadata } from '@/app/types/realtime-api-agora'
 import { iRetroPGF6Project } from '../../../RetroType6'
-import LinkIcon from '@carbon/icons-react/lib/Link'
-
+import {
+  RiArrowRightFill,
+  RiArrowRightUpLine,
+  RiLinksFill,
+} from '@remixicon/react'
+import Link from 'next/link'
 interface iLinkSection {
   data: iRetroPGF6Project
   linkSectionRef: React.MutableRefObject<HTMLElement | null>
@@ -23,21 +26,24 @@ export default function LinkSection({ data, linkSectionRef }: iLinkSection) {
       {data.links?.length !== 0 &&
         data.links?.map((item, i) => (
           <div
-            className="flex flex-col gap-1 bg-slate-50 rounded-lg px-6 py-4 min-w-72"
+            className="flex px-8 py-6 bg-slate-50 rounded-lg gap-6 break-all"
             key={i}
           >
-            <a
-              href={item.url || ''}
-              className="flex items-center gap-2  flex-grow text-base font-medium line-clamp-2 hover:text-primaryRed"
-            >
-              <LinkIcon size={20} className="group-hover:text-primaryRed" />
-              {item.name ? item.name : item.url}
-            </a>
-
-            <div>
-              {item.description && (
-                <p className="text-sm text-gray-500">{item.description}</p>
-              )}
+            <RiLinksFill size={25} color="#000" />
+            <div className="flex flex-col w-full">
+              <Link
+                href={item.url || ''}
+                target="_blank"
+                className="flex items-center gap-x-2 mb-1 text-lg font-semibold font-rubik line-clamp-2 hover:text-primaryRed"
+              >
+                <span>{item.name ? item.name : item.url}</span>
+                <RiArrowRightUpLine size={20} />
+              </Link>
+              <div>
+                {item.description && (
+                  <p className="text-sm text-gray-500">{item.description}</p>
+                )}
+              </div>
             </div>
           </div>
         ))}
